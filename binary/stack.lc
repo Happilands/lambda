@@ -1,0 +1,35 @@
+/*
+    Stacks
+    By: Daan Phlips
+*/
+
+import "arithmetic.lc";
+
+STACK_CREATE := PAIR 0 (λx.x);
+STACK_SIZE := λstack.FIRST stack;
+STACK_IS_EMPTY := λstack.ISZERO (STACK_SIZE stack);
+
+STACK_APPEND := λstack.λelement.PAIR
+(SUCC (STACK_SIZE stack))           // increment length
+(PAIR (SECOND stack) (element));      // push element
+
+STACK_HEAD := λstack.SECOND (SECOND stack);
+
+STACK_BODY := λstack.
+/*  if  */ ISZERO (STACK_SIZE stack)
+/* then */ (stack)
+/* else */ (PAIR (PRED (STACK_SIZE stack)) (FIRST (SECOND stack)));
+
+STACK_HEAD_OR_DEFAULT := λstack.λdefault.
+/*  if  */ ISZERO (STACK_SIZE stack)
+/* then */ (default)
+/* else */ (STACK_HEAD stack);
+
+/* Gets the nth element of the stack, starting at index zero */
+STACK_GET := λstack.λindex.SECOND(
+((SUCC index) PRED (STACK_SIZE stack)) FIRST (SECOND stack)
+);
+
+STACK_REVERSE_STEP := λstack.λresult.PAIR (STACK_BODY stack) (STACK_APPEND result (STACK_HEAD stack));
+STACK_REVERSE_STEP_UNPACK := λstackresult.FEED_UNPACK_2 STACK_REVERSE_STEP stackresult;
+STACK_REVERSE := λstack.SECOND ((STACK_SIZE stack) STACK_REVERSE_STEP_UNPACK (PAIR stack STACK_CREATE));

@@ -1,0 +1,4 @@
+import "recursion.lc";
+import "conditionals.lc";
+
+div := RECURSE λdiv.λn m.(lesser n m) n0 ((is_zero n) n0 (add n1 (div (sub n m) m))); // Division

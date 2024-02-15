@@ -1,0 +1,5 @@
+/*
+    Recursion
+*/
+
+RECURSE := λf.λy.(λx.f(λy.x x y)) (λx.f(λy.x x y)) y;

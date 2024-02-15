@@ -1,0 +1,98 @@
+/*
+    By: Daan
+*/
+
+// Church numbers
+
+0c := λf.λx.x;
+INCc := λn.λf.λx.f (n f x);
+DECc := λn.λf.λx.n (λg.λh.h (g f)) (λg.x) (λg.g);
+
+1c := INCc 0c;
+2c := INCc 1c;
+3c := INCc 2c;
+4c := INCc 3c;
+5c := INCc 4c;
+6c := INCc 5c;
+7c := INCc 6c;
+8c := INCc 7c;
+
+I := λx.x;
+T := λt.λf.t;
+F := λt.λf.f;
+
+PAIR    := λx.λy.λf.f x y;                  // Creates a pairing of two elements
+
+OR := λb1.λb2.b1 T b2;
+AND := λb1.λb2.b1 b2 F;
+NOT := λb.b F T;
+XOR := λb1.λb2.b1 NOT I b2;
+XNOR := λb1.λb2.b1 I NOT b2;
+
+// Binary numbers
+
+BITS := 4c;
+
+// 0b := λ0.λ1.λf.FEED_Nc BITS f 0;
+EMPTYb := λ0.λ1.λf.f;
+0b := λ0.λ1.λf.f 0 0 0 0;
+1b := λ0.λ1.λf.f 0 0 0 1;
+2b := λ0.λ1.λf.f 0 0 1 0;
+3b := λ0.λ1.λf.f 0 0 1 1;
+
+GET_BIT_0 := λi.i F T (λa7.λa6.λa5.λa4.λa3.λa2.λa1.λa0.a0);
+GET_BIT_1 := λi.i F T (λa7.λa6.λa5.λa4.λa3.λa2.λa1.λa0.a1);
+
+FOLD_Nc := λn.λf.n (λh.λx.λa.h (f x a)) I;
+
+IS_ZEROb := λi.NOT (i F T (FOLD_Nc BITS OR F));
+COUNTb := λi.i F T (FOLD_Nc BITS (λn.λb.b (INCc n) n) 0c);
+
+// FEED_N := λf.λx.f x x x -> n times
+FEED_Nc := λn.λf.n (λh.λa.h a a) (λa.f);
+
+REMOVE_HEAD_BIT := λi.λ0.λ1.λf.i 0 1 (λx.f);
+ADD_BIT := λi.λb.λ0.λ1.λf.i 0 1 (f (b 1 0));
+GLUE_BITS := λi1.λi2.λ0.λ1.λf.i2 0 1 (i1 0 1 f);
+
+FOLD2_Nc := λn.λf.n (λh.λx.λa.λb.h (f x a b)) I;
+BINARY_CASCADE := (λfun.λf.λx.λa3.λa2.λa1.λa0.λb3.λb2.λb1.λb0.fun f x a0 b0 a1 b1 a2 b2 a3 b3) (FOLD2_Nc BITS);
+
+BITWISE_ADD := λa.λb.λc.a XNOR XOR b c;
+BITWISE_CARRY := λa.λb.λc.a OR AND b c;
+
+// (binary number, carry) -> (binary number, carry)
+
+// ((carry, binary number), bool, bool) -> (carry, binary number)
+// carry == p T
+// number == p F
+BIN_FUNCTION := λp.λa.λb.PAIR (BITWISE_CARRY (p T) a b) (ADD_BIT (p F) (BITWISE_ADD (p T) a b));
+
+BINARY_ADD := λi1.λi2.(GLUE_BITS i1 i2) F T (BINARY_CASCADE BIN_FUNCTION (PAIR F EMPTYb)) F;
+BINARY_INVERT := λi.λ0.λ1.λf.i 1 0 f;
+BINARY_SUB := λi1.λi2.BINARY_ADD (BINARY_ADD i1 (BINARY_INVERT i2)) 1b;
+
+3b := BINARY_ADD 2b 1b;
+4b := BINARY_ADD 3b 1b;
+5b := BINARY_ADD 4b 1b;
+6b := BINARY_ADD 5b 1b;
+7b := BINARY_ADD 6b 1b;
+8b := BINARY_ADD 7b 1b;
+9b := BINARY_ADD 8b 1b;
+10b := BINARY_ADD 9b 1b;
+11b := BINARY_ADD 10b 1b;
+12b := BINARY_ADD 11b 1b;
+13b := BINARY_ADD 12b 1b;
+14b := BINARY_ADD 13b 1b;
+15b := BINARY_ADD 14b 1b;
+16b := BINARY_ADD 15b 1b;
+
+print 0b;
+print 1b;
+print 4b;
+print 8b;
+print 12b;
+print 15b;
+print 16b;
+
+print BINARY_SUB 8b 2b;

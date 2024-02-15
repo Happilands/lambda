@@ -1,0 +1,14 @@
+/*
+    Conditionals
+*/
+
+import "arithmetic.lc";
+import "booleans.lc";
+
+is_zero := λn.n (λunused.F) T;
+
+greater_equals := λn m.is_zero (sub m n);
+lesser_equals := λn m.greater_equals m n;
+lesser := λn m.not (greater_equals n m);
+greater := λn m.not (lesser_equals n m);
+equals := λn m.and (greater_equals n m) (lesser_equals n m);

@@ -1,0 +1,28 @@
+import "pair.lc";
+import "conditionals.lc";
+
+l_empty := pair n0 I;
+l_size := λlist.fst list;
+l_is_empty := λlist.equals (l_size list) n0;
+
+l_append := λlist element.pair (succ (fst list)) (pair (snd list) element);
+l_pop := λlist.pair (pred (fst list)) (fst (snd list));
+l_get := λlist n.snd ((sub (fst list) (succ n)) fst (snd list));
+l_back := λlist.snd (snd list);
+l_front := λlist.snd ((pred (l_size list)) fst (snd list));
+
+// TESTING / EXAMPLE
+
+/*
+my_list := l_append (l_append l_empty 5) 3;
+
+print my_list;
+print l_size my_list;
+print l_get my_list 0;
+print l_get my_list 1;
+print l_back my_list;
+print l_front my_list;
+
+popped_list := l_pop my_list;
+print popped_list;
+*/

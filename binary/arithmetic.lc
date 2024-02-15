@@ -1,0 +1,16 @@
+/*
+    Arithmetic
+    By: Daan Phlips
+*/
+
+import "pairs.lc";
+
+PRED    := λn.FIRST (n                      // The predecessor function
+(λx.PAIR (SECOND x) (SUCC (SECOND x)))
+(PAIR 0 0));
+
+MAX     := λn.λm.ISZERO (n PRED m) n m;     // Maximum
+MIN     := λn.λm.ISZERO (n PRED m) m n;     // Minimum
+
+PLUS    := λm.λn.λf.λx.m f (n f x);         // Addition
+MULT    := λm.λn.λf.m (n f);                // Multiplication

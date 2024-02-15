@@ -1,0 +1,11 @@
+/*
+    Arithmetic
+*/
+
+import "numbers.lc";
+
+pred := λn f x.n (λg h.h (g f)) (λg.x) (λg.g);  // The predecessor function
+add := λn m.λf x.m f (n f x);                   // Addition
+double := λn.add n n;                           // Doubles the number
+mul := λn m.λf.m (n f);                         // Multiplication
+sub := λn m.m pred n;                           // Subtraction

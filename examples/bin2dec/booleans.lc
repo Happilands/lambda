@@ -1,0 +1,15 @@
+/*
+    Booleans
+*/
+
+F := λt f.f;
+T := λt f.t;
+I := λx.x;
+
+not := λb.b F T;
+and := λb1 b2.b1 b2 F;
+nand := λb1 b2.not (and b1 b2);
+or := λb1 b2.b1 T b2;
+nor := λb1 b2.not (or b1 b2);
+xor := λb1 b2.b1 not I b2;
+xnor := λb1 b2.b1 I not b2;

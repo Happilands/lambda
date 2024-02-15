@@ -1,0 +1,12 @@
+/*
+    Booleans
+    By: Daan Phlips
+*/
+
+True    := λt.λf.t;                     // Encoding of the boolean True
+False   := λt.λf.f;                     // Encoding of the boolean False
+
+NOT     := (λp.p False True);           // NOT function
+AND     := λb1.λb2.b1 b2 b1;            // AND function
+OR      := λb1.λb2.b1 b1 b2;            // OR  function
+XOR     := λb1.λb2.b1 (NOT b2) b2;      // XOR function

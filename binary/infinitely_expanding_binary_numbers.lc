@@ -1,0 +1,35 @@
+/*
+    Binary Numbers
+    By: Daan Phlips
+*/
+
+import "stack.lc";
+
+0b := STACK_CREATE;
+1b := STACK_APPEND (STACK_CREATE) True;
+
+CARRY_3_BITS    := λa.λb.λc.((a OR AND) b c);
+ADD_3_BITS      := λa.λb.λc.(XOR a (XOR b c));
+
+ADD_STEPb := λn.λm.λc.λr.PACK_4
+(STACK_BODY n)
+(STACK_BODY m)
+(CARRY_3_BITS (STACK_HEAD_OR_DEFAULT n False) (STACK_HEAD_OR_DEFAULT m False) (c))
+(STACK_APPEND r (ADD_3_BITS (STACK_HEAD_OR_DEFAULT n False) (STACK_HEAD_OR_DEFAULT m False) (c)));
+
+ADD_STEP_UNPACKb := λnmcr.FEED_UNPACK_4 ADD_STEPb nmcr;
+
+ADD_FINISHb := λc.λr.(c) (STACK_APPEND r True) (r);
+ADD_FINISH_UNPACKb := λnmcr.STACK_REVERSE (ADD_FINISHb (SECOND (FIRST nmcr)) (SECOND nmcr));
+
+ADDb := λn.λm.ADD_FINISH_UNPACKb (MAX (STACK_SIZE n) (STACK_SIZE m) ADD_STEP_UNPACKb (PACK_4 n m False STACK_CREATE));
+
+2b <= ADDb 1b 1b;
+3b <= ADDb 1b 2b;
+4b <= ADDb 1b 3b;
+5b <= ADDb 1b 4b;
+6b <= ADDb 1b 5b;
+7b <= ADDb 1b 6b;
+8b <= ADDb 1b 7b;
+9b <= ADDb 1b 8b;
+10b <= ADDb 1b 9b;

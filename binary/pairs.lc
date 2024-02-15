@@ -1,0 +1,33 @@
+/*
+    Pairs
+    By: Daan Phlips
+*/
+
+import "booleans.lc";
+import "numbers.lc";
+
+PAIR    := λx.λy.λf.f x y;                  // Creates a pairing of two elements
+FIRST   := λp.p True;                       // Retrieves the first element
+SECOND  := λp.p False;                      // Retrieves the second element
+
+PACK_3 := λa.λb.λc.                PAIR (PAIR a b) c;
+PACK_4 := λa.λb.λc.λd.             PAIR (PACK_3 a b c) d;
+PACK_5 := λa.λb.λc.λd.λe.          PAIR (PACK_4 a b c d) e;
+PACK_6 := λa.λb.λc.λd.λe.λf.       PAIR (PACK_5 a b c d e) f;
+PACK_7 := λa.λb.λc.λd.λe.λf.λg.    PAIR (PACK_6 a b c d e f) g;
+PACK_8 := λa.λb.λc.λd.λe.λf.λg.λh. PAIR (PACK_7 a b c d e f g) h;
+
+FEED_UNPACK_2 := λf.λlist.f
+(FIRST list)
+(SECOND list);
+
+FEED_UNPACK_3 := λf.λlist.f
+(FIRST (FIRST list))
+(SECOND (FIRST list))
+(SECOND list);
+
+FEED_UNPACK_4 := λf.λlist.f
+(FIRST (FIRST (FIRST list)))
+(SECOND (FIRST (FIRST list)))
+(SECOND (FIRST list))
+(SECOND list);

@@ -1,0 +1,29 @@
+import "pair.lc";
+import "conditionals.lc";
+
+l_helpers_take_n := λn.n (λh.λx.λa.h x) I;
+
+l_empty := pair n0 (λf.f);
+l_size := fst;
+l_is_empty := λl.equals (l_size l) n0;
+l_prepend := λl e.pair (succ (l_size l)) (λf.(snd l) (f e));
+l_append := λl e.pair (succ (l_size l)) (λf.(snd l f) e);
+l_remove_front_n := λl n.pair (sub (l_size l) n) (λf.(snd l) (((λn.n (λh.λf.λa.h f) I) n) f));
+
+// TESTING / EXAMPLE
+
+
+//my_list := l_append (l_append l_empty n5) n3;
+
+//print my_list;
+
+/*
+print l_size my_list;
+print l_get my_list 0;
+print l_get my_list 1;
+print l_back my_list;
+print l_front my_list;
+
+popped_list := l_pop my_list;
+print popped_list;
+*/

@@ -1,0 +1,19 @@
+/*
+    Fibonacci
+    By: Gerald
+*/
+
+import "../conditionals.lc";
+import "../recursion.lc";
+
+FIB_FUNCTION := λfib.λn.is_zero (pred n) (1) (add (fib (pred n)) (fib(2 pred n)));
+FIB := RECURSE FIB_FUNCTION;
+
+print RECURSE FIB_FUNCTION 0;
+print RECURSE FIB_FUNCTION 1;
+print RECURSE FIB_FUNCTION 2;
+print RECURSE FIB_FUNCTION 3;
+print RECURSE FIB_FUNCTION 4;
+print RECURSE FIB_FUNCTION 5;
+print RECURSE FIB_FUNCTION 6;
+print RECURSE FIB_FUNCTION 7;

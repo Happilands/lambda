@@ -1,0 +1,62 @@
+/*
+    Numbers 0-1000
+    By: Daan Phlips
+*/
+
+import "booleans.lc";
+
+0 := λf.λx.x;                           // Encoding of the natural number Zero
+SUCC := λn.λf.λx.f (n f x);             // The successor function
+
+ISZERO := λn.n (λx.False) True;
+
+1 := SUCC 0;
+2 := SUCC 1;
+3 := SUCC 2;
+4 := SUCC 3;
+5 := SUCC 4;
+6 := SUCC 5;
+7 := SUCC 6;
+8 := SUCC 7;
+9 := SUCC 8;
+10 := SUCC 9;
+11 := SUCC 10;
+12 := SUCC 11;
+13 := SUCC 12;
+14 := SUCC 13;
+15 := SUCC 14;
+16 := SUCC 15;
+17 := SUCC 16;
+18 := SUCC 17;
+19 := SUCC 18;
+20 := SUCC 19;
+21 := SUCC 20;
+22 := SUCC 21;
+23 := SUCC 22;
+24 := SUCC 23;
+25 := SUCC 24;
+26 := SUCC 25;
+27 := SUCC 26;
+28 := SUCC 27;
+29 := SUCC 28;
+30 := SUCC 29;
+31 := SUCC 30;
+32 := SUCC 31;
+33 := SUCC 32;
+34 := SUCC 33;
+35 := SUCC 34;
+36 := SUCC 35;
+37 := SUCC 36;
+38 := SUCC 37;
+39 := SUCC 38;
+40 := SUCC 39;
+41 := SUCC 40;
+42 := SUCC 41;
+43 := SUCC 42;
+44 := SUCC 43;
+45 := SUCC 44;
+46 := SUCC 45;
+47 := SUCC 46;
+48 := SUCC 47;
+49 := SUCC 48;
+50 := SUCC 49;

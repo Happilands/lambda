@@ -1,0 +1,6 @@
+import "binary8.lc";
+
+UPDATE := λs.BINARY_ADD s 1b;
+RENDER := λx.x;
+
+play 0b UPDATE RENDER;

@@ -1,0 +1,19 @@
+/*
+    Program
+    By: Daan Phlips
+*/
+
+import "infinitely_expanding_binary_numbers.lc";
+
+// FUCKING FAST GODDAMNIT!!!!!!
+
+16b <= ADDb 8b 8b;
+32b <= ADDb 16b 16b;
+64b <= ADDb 32b 32b;
+128b <= ADDb 64b 64b;
+256b <= ADDb 128b 128b;
+
+print 2b;
+print 4b;
+print 8b;
+print 256b;

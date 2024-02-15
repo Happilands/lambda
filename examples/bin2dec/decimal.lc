@@ -1,0 +1,24 @@
+import "conditionals.lc";
+import "recursion.lc";
+import "list.lc";
+import "division.lc";
+
+TAKE_N := λn.n (λh.λx.λa.h x) I;
+church2digit := λn.λf 0 1 2 3 4 5 6 7 8 9.f ((TAKE_N n) (λres.TAKE_N (sub n9 n) res) 0 1 2 3 4 5 6 7 8 9);
+
+power_of_ten_step := λfunc.λp.λn.(lesser n (mul p n10)) (p) (func (mul p n10) n);
+power_of_ten := RECURSE power_of_ten_step n1;
+
+getdigits := λn.(RECURSE λgetdigits.λdigits.λm p.equals p n0 (digits) (    
+    (λndivp.getdigits (l_append digits ndivp) (sub m (mul ndivp p)) (div p n10)) (div m p)
+)) l_empty n (power_of_ten n);
+
+
+add_digit := λd n.λf 0 1 2 3 4 5 6 7 8 9.d (church2digit n f 0 1 2 3 4 5 6 7 8 9) 0 1 2 3 4 5 6 7 8 9;
+
+church2decimal := λn.RECURSE (λfunc.λdigit_list.λdecimal.(l_is_empty digit_list) (decimal) (func (l_pop digit_list) (add_digit decimal (l_back digit_list)))) 
+                    (getdigits n) (λf 0 1 2 3 4 5 6 7 8 9.f) I;
+
+print church2decimal n34;
+print church2decimal n57;
+print church2decimal n112;
